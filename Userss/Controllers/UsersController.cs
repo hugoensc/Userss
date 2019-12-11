@@ -34,16 +34,25 @@ namespace Userss.Controllers
         // Creando URLs personalizadas
         public IActionResult Index(double data)
         {
-            var url = Url.Action("Method", "Users");
+            //var url = Url.Action("Method", "Users", new { age = 25, name = "Hugo" });
+            //var url = Url.Action("Method", "Users");
             //return View("Index", data);
             //return Content(url);
+            var url = Url.RouteUrl("Cristina", new { age = 28, name = "Hugo" });
             return Redirect(url);
         }
 
-        public IActionResult Method()
+        [HttpGet("/[controller]/[action]", Name = "Cristina")]
+        public IActionResult Method(int age, String name)
         {
-            return View();
+            var data = $"Nombre: {name} y Edad: {age}";
+            return View("Index", data);
         }
+        
+        //public IActionResult Method()
+        //{
+        //    return View();
+        //}
 
     } 
 }
