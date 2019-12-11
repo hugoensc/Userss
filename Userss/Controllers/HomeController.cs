@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+// Espacio de nombres importado para el proposito ¬
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Userss.Models;
@@ -20,7 +22,7 @@ namespace Userss.Controllers
 
         public IActionResult Index()
         {
-            throw new Exception("This is some exception!!");
+            //throw new Exception("This is some exception!!");
             return View();
         }
 
@@ -37,13 +39,22 @@ namespace Userss.Controllers
             {
                 error = new ErrorViewModel
                 {
-                    RequestId = Convert.ToString(statusCode)
+                    RequestId = Convert.ToString(statusCode),
+                    ErrorMessage = "Se produjo un error al procesar la solicitud",
                 };
             }
-            //else
-            //{
-
-            //}
+            else
+            {
+                var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+                if (exceptionFeature != null)
+                {
+                    error = new ErrorViewModel
+                    {
+                        RequestId = "500",
+                        ErrorMessage = exceptionFeature.Error.Message,
+                    };
+                }
+            }
 
             return View(error);
             //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
