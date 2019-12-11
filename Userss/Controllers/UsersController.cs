@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Userss.Controllers
 {
-    [Route("/Name")]
+    //[Route("/Users")]
+    //[Route("/[controller]")]
     public class UsersController : Controller
     {
         public IActionResult Index()
@@ -16,8 +17,10 @@ namespace Userss.Controllers
 
         // [HttpPost]
         //[HttpGet]
-        [Route("/Name/Hugo")]
-        public IActionResult Index(string data, int age)
+        [Route("/Users/Hugo")]
+        //[Route("/Users/Enrique/{data}")]
+        [Route("/[controller]/[action]/{data}")]
+        public IActionResult Index(string  data, int age)
         {
             //ViewData["id"] = data + " " + age;
             String datas = data + " " + age;
