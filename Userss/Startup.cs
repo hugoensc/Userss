@@ -12,6 +12,8 @@ using Userss.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+// Espacio de nombres  agregado para el controlador de errores
+using Microsoft.AspNetCore.Http;
 
 namespace Userss
 {
@@ -50,6 +52,18 @@ namespace Userss
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Controlador de codigos de error
+            // Muestra un error 404
+            app.UseStatusCodePages("text/plain", "Pagina de codigos de estado, codigo de estado: {0}");
+            // -----------------Código agregado-----------------
+            //app.UseStatusCodePages(async context => {
+            //    await context.HttpContext.Response.WriteAsync(
+            //        "Pagina de codigos de estado, codigo de estado: " + context.HttpContext.Response.StatusCode
+            //        );
+            //});
+            // -----------------Código agregado-----------------
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
