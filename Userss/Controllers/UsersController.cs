@@ -42,17 +42,24 @@ namespace Userss.Controllers
             return Redirect(url);
         }
 
-        [HttpGet("/[controller]/[action]", Name = "Cristina")]
-        public IActionResult Method(int age, String name)
-        {
-            var data = $"Nombre: {name} y Edad: {age}";
-            return View("Index", data);
-        }
+        //[HttpGet("/[controller]/[action]", Name = "Cristina")]
+        //public IActionResult Method(int age, String name)
+        //{
+        //    var data = $"Nombre: {name} y Edad: {age}";
+        //    return View("Index", data);
+        //}
         
         //public IActionResult Method()
         //{
         //    return View();
-        //} 
+        //}
+        
+        [HttpGet("[controller]/[action]", Name = "Cristina")]
+        public IActionResult Method(int code)
+        {
+            var data = $"Código de estado: {code}";
+            return View("Index", data);
+        }
 
     } 
 }

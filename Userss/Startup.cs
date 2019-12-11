@@ -55,7 +55,7 @@ namespace Userss
 
             // Controlador de codigos de error
             // Muestra un error 404
-            app.UseStatusCodePages("text/plain", "Pagina de codigos de estado, codigo de estado: {0}");
+            //app.UseStatusCodePages("text/plain", "Pagina de codigos de estado, codigo de estado: {0}");
             // -----------------Código agregado-----------------
             //app.UseStatusCodePages(async context => {
             //    await context.HttpContext.Response.WriteAsync(
@@ -63,6 +63,15 @@ namespace Userss
             //        );
             //});
             // -----------------Código agregado-----------------
+
+            // -------------Parte 2-------------
+            //app.UseStatusCodePagesWithRedirects("/Users/Method?code={0}");
+            // Es mas recomendable utilizar el siguiente metodo:
+
+            //app.UseStatusCodePagesWithReExecute("/Users/Method", "?code={0}");
+            //app.UseStatusCodePagesWithReExecute("/Home/Error", "?code={0}");
+            app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+            // -------------Parte 2-------------
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
